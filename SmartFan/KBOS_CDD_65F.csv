@@ -1,0 +1,19 @@
+Description:,"Fahrenheit-based cooling degree days for a base temperature of 65F"
+Source:,"www.degreedays.net (using temperature data from www.wunderground.com)"
+Accuracy:,"Estimates were made to account for missing data: the ""% Estimated"" column shows how much each figure was affected (0% is best, 100% is worst)"
+Station:,"Boston, MA, US (71.00W,42.36N)"
+Station ID:,"KBOS"
+
+Month starting,CDD,% Estimated
+2013-03-01,0,0
+2013-04-01,3,0
+2013-05-01,52,0.03
+2013-06-01,173,0
+2013-07-01,351,0
+2013-08-01,218,0.6
+2013-09-01,97,0
+2013-10-01,22,0
+2013-11-01,2,0
+2013-12-01,0,0
+2014-01-01,0,0.03
+2014-02-01,0,0
