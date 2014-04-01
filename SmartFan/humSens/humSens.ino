@@ -25,9 +25,10 @@ void print_float(float f, int num_digits);
 #define sensPwr 4
 
 float tempH, tempL, humH, humL, currentTemp, currentHum;
-float targetTemp =20.17
-;
+float targetTemp =15.25;
 float argetHum = 16.0;
+float deltaTemp, deltaHum;
+int accelFan;
 
 boolean fan = false;
 
@@ -40,6 +41,7 @@ void setup(void)
    pinMode(fanLED, OUTPUT);
    digitalWrite(sensPwr, HIGH); // this turns on the HIH3610
    delay(5000);
+   tempL = 50;
    Serial.println(">>>>>>>>>>>>>>>>>>>>>>>>");  // just to be sure things are working
 }
 
@@ -74,14 +76,19 @@ void loop(void)
       currentTemp = T_C;
       currentHum = RH;
       
-     if(currentTemp > targetTemp){
-     digitalWrite(fanPin, HIGH);  
-     digitalWrite(fanLED, HIGH);   
-     }else{
-       digitalWrite(fanPin, LOW);   
-       digitalWrite(fanLED, LOW);   
-       
-     }
+     accelFan = map(currentTemp, targetTemp, tempH, 0, 255);
+     
+     digitalWrite(fanPin, accelFan);
+     digitalWrite(fanLED, accelFan);   
+
+//     if(currentTemp > targetTemp){
+//     digitalWrite(fanPin, HIGH);  
+//     digitalWrite(fanLED, HIGH);   
+//     }else{
+//       digitalWrite(fanPin, LOW);   
+//       digitalWrite(fanLED, LOW);   
+//       
+//     }
      
      
      
@@ -111,12 +118,15 @@ void trackHighLow(){
 }
 
 void debug(){
+   Serial.println();
+      Serial.print("acceleration fan:");
+          Serial.println(accelFan);
       Serial.println();
-      Serial.print("wondering: +");
-      Serial.print(currentHum);
-      Serial.print("spce");
-      Serial.println(currentTemp);
-      delay(1000);
+      Serial.print("LOWS  ");
+      Serial.println(tempL);
+            Serial.print("high  ");
+      Serial.println(tempH);
+      delay(500);
 }
 
 byte fetch_humidity_temperature(unsigned int *p_H_dat, unsigned int *p_T_dat)
